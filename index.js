@@ -1,9 +1,9 @@
-const gradient = require('gradient-string');
-const readlineSync = require('readline-sync');
-const cluster = require('cluster');
-const puppeteer = require('puppeteer');
-const generator = require('generate-password');
-const fs = require('fs');
+import gradient from 'gradient-string';
+import readlineSync from 'readline-sync';
+import cluster from 'cluster';
+import { launch } from 'cloakbrowser/puppeteer';
+import generator from 'generate-password';
+import fs from 'fs';
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May'];
 const days = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15',
@@ -29,7 +29,7 @@ function writedingAccount(username, password, cookie) {
 async function runPuppeteer(roundNumber, usernameInput) {
     console.log(`Starting round ${roundNumber}`);
 
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await launch({ headless: false, humanize: true });
 
     const page = await browser.newPage();
 
